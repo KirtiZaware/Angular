@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ExternalApiCallServiceService } from './external-api-call-service.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'covidApiCall';
+
+  constructor(private CallExternalApiService:ExternalApiCallServiceService){
+
+  }
+
+  getCovidDetails:any = [];
+  
+  ngOnInit(){
+    this.CallExternalApiService.getCovidData().subscribe((data)=>{
+      this.getCovidDetails = data;
+      console.log(this.getCovidDetails);
+    })
+  }
+  
 }
